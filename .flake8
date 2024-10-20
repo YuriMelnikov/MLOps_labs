@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 99
+ignore = F401  # Игнорируем ошибку "imported but unused" в __init__.py
+exclude = __pycache__

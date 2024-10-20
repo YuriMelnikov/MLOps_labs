@@ -1,10 +1,42 @@
 MLOps_Labs
+
+## Setup environment
+
+1. Клонировать репозиторий:
+
+   ```bash
+   git clone https://github.com/YuriMelnikov/MLOps_labs.git
+   cd MLOps_labs
+   ```
+
+2. Создать виртуальное окружение:
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   venv\Scripts\activate  # Windows
+   ```
+
+3. Установить зависимости:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Установить pre-commit:
+   ```bash
+   pre-commit install
+   ```
+
+<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
+    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
+</a>
+
 ==============================
 
 Performing laboratory work on MLOps
 
-Project Organization
-------------
+## Project Organization
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -51,7 +83,6 @@ Project Organization
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
-
---------
+---
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
