@@ -1,31 +1,40 @@
 MLOps_Labs
 
-## Setup environment
+## Setup
 
-1. Клонировать репозиторий:
+1. Установить зависимости через Poetry:
 
    ```bash
-   git clone https://github.com/YuriMelnikov/MLOps_labs.git
-   cd MLOps_labs
+   poetry install
+
    ```
 
-2. Создать виртуальное окружение:
+2. Запустить контейнер Docker с minio:
 
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate  # Windows
+   docker-compose up -d
+
    ```
 
-3. Установить зависимости:
+3. Установить права доступа:
 
    ```bash
-   pip install -r requirements.txt
+   chmod +x mlops_labs/lab3/shell/*.sh pipeline.sh
+
    ```
 
 4. Установить pre-commit:
+
    ```bash
    pre-commit install
+
+   ```
+
+5. Запустить pipeline.sh:
+
+   ```bash
+   ./pipeline.sh
+
    ```
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
@@ -48,6 +57,32 @@ Performing laboratory work on MLOps
     │   └── raw            <- The original, immutable data dump.
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    │
+    ├── mlops_labs            <- Main project directory for MLOps tasks and labs.
+    │   └── lab3/
+    │       ├── __init__.py    <- Initialization file to make `lab3` a Python package.
+    │       │
+    │       ├── data/
+    │       │   ├── titanic.csv             <- Raw titanic dataset for processing and transformations.
+    │       │   └── transformed_titanic.csv <- Processed dataset after transformations.
+    │       │
+    │       ├── scripts/                   <- Python scripts for specific ETL and data handling steps.
+    │       │   ├── download_from_s3.py    <- Script for downloading data from an S3-compatible storage.
+    │       │   ├── transform_data.py      <- Script for transforming the titanic dataset as part of the ETL pipeline.
+    │       │   ├── upload_to_s3.py        <- Script to upload the initial dataset to S3 storage.
+    │       │   └── upload_transformed_data.py <- Script to upload the transformed dataset back to S3.
+    │       │
+    │       └── shell/                    <- Shell scripts for individual ETL steps and data pipeline operations.
+    │           ├── extract.sh            <- Script for extracting data as part of the ETL process.
+    │           ├── first_load.sh         <- Script to perform initial data load to S3.
+    │           ├── load.sh               <- Script for loading data into the final destination.
+    │           └── transform.sh          <- Script for data transformation tasks.
+    │
+    ├── docker-compose.yaml    <- Docker Compose configuration for setting up services like MinIO for local S3 storage.
+    │
+    ├── pipeline.sh            <- Main shell script for running the full ETL pipeline, calling the scripts in sequence.
+    │
+    ├── pyproject.toml         <- Poetry configuration file, managing dependencies and project metadata.
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │

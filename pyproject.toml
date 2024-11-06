@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "mlops_labs"
+version = "0.1.0"
+description = "working at MLOps Labs"
+authors = ["YuriMelnikov, petrmoskru"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "2.1.2"
+boto3 = "^1.35.53"
+pandas = "^2.2.3"
+black = "^24.10.0"
+flake8 = "^7.1.1"
+mypy = "^1.13.0"
+pre-commit = "^4.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
