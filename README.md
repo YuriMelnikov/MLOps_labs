@@ -2,6 +2,8 @@ MLOps_Labs
 
 ## Setup
 
+- у файла .env.example удалите ".example"
+
 1. Установить зависимости через Poetry:
 
    ```bash
