@@ -2,8 +2,6 @@ MLOps_Labs
 
 ## Setup
 
-- у файла .env.example удалите ".example"
-
 1. Установить зависимости через Poetry:
 
    ```bash
@@ -21,7 +19,7 @@ MLOps_Labs
 3. Установить права доступа:
 
    ```bash
-   chmod +x mlops_labs/lab3/shell/*.sh pipeline.sh
+   chmod +x mlops_labs/lab4/src/modeling/shell/*.sh pipeline_final.sh preparation.sh src/shell/*.sh full_pipeline.sh
 
    ```
 
@@ -35,7 +33,7 @@ MLOps_Labs
 5. Запустить pipeline.sh:
 
    ```bash
-   ./pipeline.sh
+   ./pipeline_final.sh
 
    ```
 
@@ -61,28 +59,61 @@ Performing laboratory work on MLOps
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── mlops_labs            <- Main project directory for MLOps tasks and labs.
-    │   └── lab3/
-    │       ├── __init__.py    <- Initialization file to make `lab3` a Python package.
+    │   ├── lab3/
+    │   │   ├── __init__.py    <- Initialization file to make `lab3` a Python package.
+    │   │   │
+    │   │   ├── data/
+    │   │   │   ├── titanic.csv             <- Raw titanic dataset for processing and transformations.
+    │   │   │   └── transformed_titanic.csv <- Processed dataset after transformations.
+    │   │   │
+    │   │   ├── scripts/                   <- Python scripts for specific ETL and data handling steps.
+    │   │   │   ├── download_from_s3.py    <- Script for downloading data from an S3-compatible storage.
+    │   │   │   ├── transform_data.py      <- Script for transforming the titanic dataset as part of the ETL pipeline.
+    │   │   │   ├── upload_to_s3.py        <- Script to upload the initial dataset to S3 storage.
+    │   │   │   └── upload_transformed_data.py <- Script to upload the transformed dataset back to S3.
+    │   │   │
+    │   │   └── shell/                    <- Shell scripts for individual ETL steps and data pipeline operations.
+    │   │       ├── extract.sh            <- Script for extracting data as part of the ETL process.
+    │   │       ├── first_load.sh         <- Script to perform initial data load to S3.
+    │   │       ├── load.sh               <- Script for loading data into the final destination.
+    │   │       └── transform.sh          <- Script for data transformation tasks.
+    │   └── lab4/
+    │       ├── __init__.py               <- Initialization file to make `lab4` a Python package.
     │       │
-    │       ├── data/
-    │       │   ├── titanic.csv             <- Raw titanic dataset for processing and transformations.
-    │       │   └── transformed_titanic.csv <- Processed dataset after transformations.
+    │       ├── configs/                  <- Configuration files for the pipeline.
+    │       │   └── hyperparams.yaml      <- YAML file containing hyperparameters for modeling or processing.
     │       │
-    │       ├── scripts/                   <- Python scripts for specific ETL and data handling steps.
-    │       │   ├── download_from_s3.py    <- Script for downloading data from an S3-compatible storage.
-    │       │   ├── transform_data.py      <- Script for transforming the titanic dataset as part of the ETL pipeline.
-    │       │   ├── upload_to_s3.py        <- Script to upload the initial dataset to S3 storage.
-    │       │   └── upload_transformed_data.py <- Script to upload the transformed dataset back to S3.
+    │       ├── data/                     <- Folder to store datasets at various stages of the pipeline.
+    │       │   ├── external              <- External data that has been extracted.
+    │       │   │   └── extracted.csv     <- Extracted data file.
+    │       │   ├── interim               <- Intermediate data outputs during the pipeline.
+    │       │   │   └── transformed.csv   <- Transformed data file.
+    │       │   ├── processed             <- Final, cleaned, and processed data ready for analysis or modeling.
+    │       │   │   └── preprocessed_data.csv <- Preprocessed data file.
+    │       │   └── raw                   <- Raw data before any processing or transformations.
+    │       │       └── extract_data.csv  <- Raw data file for the pipeline input.
     │       │
-    │       └── shell/                    <- Shell scripts for individual ETL steps and data pipeline operations.
-    │           ├── extract.sh            <- Script for extracting data as part of the ETL process.
-    │           ├── first_load.sh         <- Script to perform initial data load to S3.
-    │           ├── load.sh               <- Script for loading data into the final destination.
-    │           └── transform.sh          <- Script for data transformation tasks.
+    │       └── src/                      <- Source code for the lab's pipeline and related scripts.
+    │           ├── modeling              <- Scripts related to the modeling stage of the pipeline.
+    │           │   ├── shell/            <- Shell scripts for specific modeling-related operations.
+    │           │   │   ├── extract.sh    <- Script for extracting data for modeling.
+    │           │   │   ├── first_load.sh <- Script to load initial model-related data to storage.
+    │           │   │   ├── preprocess.sh <- Script to preprocess data for modeling.
+    │           │   │   └── upload.sh     <- Script to upload model-related outputs or files.
+    │           │   ├── __init__.py       <- Initialization file for the modeling module.
+    │           │   ├── load.py           <- Script to handle data loading operations for modeling.
+    │           │   └── transform.py      <- Script to perform data transformations for modeling.
+    │           ├── extract.py            <- Script to extract data from a source (e.g., S3 or other storage).
+    │           ├── first_load.py         <- Script for handling the first-time data load operations.
+    │           ├── load.py               <- Script for general data loading functionality.
+    │           └── transform.py          <- Script to handle general data transformation tasks.
     │
     ├── docker-compose.yaml    <- Docker Compose configuration for setting up services like MinIO for local S3 storage.
     │
     ├── pipeline.sh            <- Main shell script for running the full ETL pipeline, calling the scripts in sequence.
+    ├── full_pipeline.sh
+    ├── pipeline_final.sh
+    ├── preparation.sh
     │
     ├── pyproject.toml         <- Poetry configuration file, managing dependencies and project metadata.
     │
